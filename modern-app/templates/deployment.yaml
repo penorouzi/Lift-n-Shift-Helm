@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "modern-app.fullname" . }}
+  labels:
+    {{- include "modern-app.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "modern-app.selectorLabels" . | nindent 8 }}
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": windows
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.RepositoryUrl }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          limits:
+            cpu: 1
+            memory: 800M
+          requests:
+            cpu: .1
+            memory: 300M
+        ports:
+          - containerPort: 80
+      {{- if .Values.acrCredentials.enabled }}
+      imagePullSecrets:
+      - name: acrkey
+      {{- end }}
+  selector:
+    matchLabels:
+      {{- include "modern-app.selectorLabels" . | nindent 6 }}
