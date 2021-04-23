@@ -1,12 +1,12 @@
 apiVersion: v2
-name: ASP-NET-APP
+name: asp-net-app
 description: Windows ASP.NET Helm chart for Kubernetes
 
 dependencies:
   - name: ingress-nginx
     version: 3.29.0
     repository: https://kubernetes.github.io/ingress-nginx
-    condition: ingress-nginx.install
+    condition: install-ingress-nginx.enabled
 
 # A chart can be either an 'application' or a 'library' chart.
 #
