@@ -32,7 +32,7 @@ spec:
           - containerPort: 80
       {{- if .Values.acrCredentials.enabled }}
       imagePullSecrets:
-      - name: acrkey
+      - name: acrkublogin
       {{- end }}
   selector:
     matchLabels:

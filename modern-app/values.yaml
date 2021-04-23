@@ -4,8 +4,9 @@
 
 replicaCount: 2
 
+
 acrCredentials:
-  enabled: true
+  enabled: false
   registryName:
   servicePrincipalId:
   servicePrincipalPass:
@@ -14,7 +15,7 @@ image:
   RepositoryUrl: testakshci.azurecr.io/demos/aspnetapp
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1773"
+  tag: "1776"
 
 
 

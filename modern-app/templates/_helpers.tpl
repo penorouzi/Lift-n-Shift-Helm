@@ -63,9 +63,7 @@ Create the name of the service account to use
 
 
 {{- define "imagePullSecret" }}
-{{- if not (lookup "v1" "Secret" .Release.Namespace "acrKubLogin") }}
 {{- with .Values.acrCredentials }}
 {{- printf "{\"auths\":{\"%s.azurecr.io\":{\"username\":\"%s\",\"password\":\"%s\",\"auth\":\"%s\"}}}" (required "ACR Registry Name is Requied!" .registryName) (required "Service Principal ID is Requied!" .servicePrincipalId) (required "Service Principal Password is Requied!" .servicePrincipalPass) (printf "%s:%s" .servicePrincipalId .servicePrincipalPass | b64enc) | b64enc }}
-{{- end }}
 {{- end }}
 {{- end }}
