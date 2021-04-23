@@ -47,6 +47,9 @@ securityContext: {}
 service:
   type: LoadBalancer
   port: 80
+  
+install-ingress-nginx:
+  enabled: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
